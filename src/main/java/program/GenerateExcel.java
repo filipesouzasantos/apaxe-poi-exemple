@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 
 import entity.Aluno;
@@ -36,29 +38,87 @@ public class GenerateExcel {
         listaAlunos.add(new Aluno("Vitor", "4332341", 7, 9, 0, false));
         
 
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        headerStyle.setAlignment(CellStyle.ALIGN_CENTER);
+        headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+
+        CellStyle textStyle = workbook.createCellStyle();
+        textStyle.setAlignment(CellStyle.ALIGN_CENTER);
+        textStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        
+        Cell cell;
+        Row row;
         
         int rownum = 0;
+        int cellnum = 0;
+        
+     // Configurando Header
+        row = sheetAlunos.createRow(rownum++);
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("Nome");
+
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("RA");
+
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("Nota 1");
+        
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("Nota 2");
+        
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("Média");
+        
+        cell = row.createCell(cellnum++);
+        cell.setCellStyle(headerStyle);
+        cell.setCellValue("Aprovado");
+
+        
         for (Aluno aluno : listaAlunos) {
-            Row row = sheetAlunos.createRow(rownum++);
-            int cellnum = 0;
-            Cell cellNome = row.createCell(cellnum++);
-            cellNome.setCellValue(aluno.getNome());
-            Cell cellRa = row.createCell(cellnum++);
-            cellRa.setCellValue(aluno.getRa());
-            Cell cellNota1 = row.createCell(cellnum++);
-            cellNota1.setCellValue(aluno.getNota1());
-            Cell cellNota2 = row.createCell(cellnum++);
-            cellNota2.setCellValue(aluno.getNota2());
-            Cell cellMedia = row.createCell(cellnum++);
-            cellMedia.setCellValue((aluno.getNota1() + aluno.getNota2()) / 2);
-            Cell cellAprovado =row.createCell(cellnum++);
-            cellAprovado.setCellValue(cellMedia.getNumericCellValue() >= 6);
+            row = sheetAlunos.createRow(rownum++);
+            cellnum = 0;
             
-            if(cellMedia.getNumericCellValue() >= 6) {
+            cell = row.createCell(cellnum++);
+            cell.setCellStyle(textStyle);
+            cell.setCellValue(aluno.getNome());
+            
+            
+            cell = row.createCell(cellnum++);
+            cell.setCellStyle(textStyle);
+            cell.setCellValue(aluno.getRa());
+            
+            
+            cell = row.createCell(cellnum++);
+            cell.setCellStyle(textStyle);
+            cell.setCellValue(aluno.getNota1());
+            
+            
+            cell = row.createCell(cellnum++);
+            cell.setCellStyle(textStyle);
+            cell.setCellValue(aluno.getNota2());
+            
+            
+            cell = row.createCell(cellnum++);
+            cell.setCellStyle(textStyle);
+            Double media = aluno.getNota1() + aluno.getNota2() / 2;
+            cell.setCellValue(media);
+            
+            
+            Cell cellAprovado =row.createCell(cellnum++);
+            cellAprovado.setCellValue(media >= 6);
+            
+            if(media >= 6) {
             	 row = sheetAlunos.createRow(rownum++);
             	 cellnum = 0;
-            	 cellNome = row.createCell(cellnum++);
-                 cellNome.setCellValue("by Filipe Souza Santos");
+            	 cell = row.createCell(cellnum++);
+                 cell.setCellValue("by Filipe Souza Santos");
             }
         }
         
