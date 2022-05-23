@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -21,18 +22,20 @@ public class GenerateExcel {
 		HSSFSheet sheetAlunos = workbook.createSheet("Alunos");
 		
 		
-		List<Aluno> listaAlunos = new ArrayList<Aluno>();
+		List<Aluno> listaAlunos = new ArrayList<>();
         listaAlunos.add(new Aluno("Eduardo", "9876525", 7, 8, 0, false));
         listaAlunos.add(new Aluno("Luiz", "1234466", 5, 8, 0, false));
         listaAlunos.add(new Aluno("Bruna", "6545657", 7, 6, 0, false));
         listaAlunos.add(new Aluno("Carlos", "3456558", 10, 3, 0, false));
         listaAlunos.add(new Aluno("Sonia", "6544546", 7, 8, 0, false));
-        listaAlunos.add(new Aluno("Brianda", "3234535", 6, 5, 0, false));
+        listaAlunos.add(new Aluno("Brianda", "3234535", 6, 5, 0, true));
         listaAlunos.add(new Aluno("Pedro", "4234524", 7, 5, 0, false));
         listaAlunos.add(new Aluno("Julio", "5434513", 7, 2, 0, false));
-        listaAlunos.add(new Aluno("Henrique", "6543452", 7, 8, 0, false));
+        listaAlunos.add(new Aluno("Henrique", "6543452", 7, 8, 0, true));
         listaAlunos.add(new Aluno("Fernando", "4345651", 5, 8, 0, false));
         listaAlunos.add(new Aluno("Vitor", "4332341", 7, 9, 0, false));
+        
+
         
         int rownum = 0;
         for (Aluno aluno : listaAlunos) {
@@ -50,6 +53,13 @@ public class GenerateExcel {
             cellMedia.setCellValue((aluno.getNota1() + aluno.getNota2()) / 2);
             Cell cellAprovado =row.createCell(cellnum++);
             cellAprovado.setCellValue(cellMedia.getNumericCellValue() >= 6);
+            
+            if(cellMedia.getNumericCellValue() >= 6) {
+            	 row = sheetAlunos.createRow(rownum++);
+            	 cellnum = 0;
+            	 cellNome = row.createCell(cellnum++);
+                 cellNome.setCellValue("by Filipe Souza Santos");
+            }
         }
         
         try {
