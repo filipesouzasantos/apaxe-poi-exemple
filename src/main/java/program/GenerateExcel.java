@@ -25,17 +25,17 @@ public class GenerateExcel {
 		
 		
 		List<Aluno> listaAlunos = new ArrayList<>();
-        listaAlunos.add(new Aluno("Eduardo", "9876525", 7, 8, 0, false));
-        listaAlunos.add(new Aluno("Luiz", "1234466", 5, 8, 0, false));
-        listaAlunos.add(new Aluno("Bruna", "6545657", 7, 6, 0, false));
-        listaAlunos.add(new Aluno("Carlos", "3456558", 10, 3, 0, false));
-        listaAlunos.add(new Aluno("Sonia", "6544546", 7, 8, 0, false));
-        listaAlunos.add(new Aluno("Brianda", "3234535", 6, 5, 0, true));
+        listaAlunos.add(new Aluno("Filipe", "9876525", 7, 8, 0, false));
+        listaAlunos.add(new Aluno("Nathan", "1234466", 5, 8, 0, false));
+        listaAlunos.add(new Aluno("Mateus", "6545657", 7, 6, 0, false));
+        listaAlunos.add(new Aluno("Brunão", "3456558", 10, 3, 0, false));
+        listaAlunos.add(new Aluno("GB", "6544546", 7, 8, 0, false));
+        listaAlunos.add(new Aluno("Maestrali", "3234535", 6, 5, 0, true));
         listaAlunos.add(new Aluno("Pedro", "4234524", 7, 5, 0, false));
-        listaAlunos.add(new Aluno("Julio", "5434513", 7, 2, 0, false));
-        listaAlunos.add(new Aluno("Henrique", "6543452", 7, 8, 0, true));
-        listaAlunos.add(new Aluno("Fernando", "4345651", 5, 8, 0, false));
-        listaAlunos.add(new Aluno("Vitor", "4332341", 7, 9, 0, false));
+        listaAlunos.add(new Aluno("Saliba", "5434513", 7, 2, 0, false));
+        listaAlunos.add(new Aluno("Cris", "6543452", 7, 8, 0, true));
+        listaAlunos.add(new Aluno("Gustavo", "4345651", 5, 8, 0, false));
+        listaAlunos.add(new Aluno("Rafael", "4332341", 7, 9, 0, false));
         
 
         CellStyle headerStyle = workbook.createCellStyle();
